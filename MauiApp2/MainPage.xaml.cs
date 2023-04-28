@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows;
 
 namespace MauiApp2;
@@ -6,46 +7,31 @@ namespace MauiApp2;
 public partial class MainPage : ContentPage
 {
 
-    IDispatcherTimer timer;
-    TimeSpan elapsed = TimeSpan.Zero;
-    private bool timerStarted = false;
     public MainPage()
 	{
 		InitializeComponent();
 
     }
 
-	private void OnCounterClicked(object sender, EventArgs e)
-	{
-        if (timerStarted == false)
-        {
-            timer = Dispatcher.CreateTimer();
-            timer.Interval = TimeSpan.FromMilliseconds(10);
-
-            timer.Tick += (s, e) =>
-            {
-                elapsed += timer.Interval;
-                timerLabel.Text = elapsed.ToString("hh\\:mm\\:ss\\:ff");
-            };
-            CounterBtn.Text = "Pause";
-            timer.Start();
-            timerStarted = true;
-        }
-        else
-        {
-            CounterBtn.Text = "Start";
-            timer.Stop();
-            timerStarted = false;
-        }
-        
-
+    private async void OnNextPage(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("StopWatchPage");
     }
 
-    private void OnResetClicked(object sender, EventArgs e)
+    private void AddNewUser_Clicked(object sender, EventArgs e)
     {
-            timer.Stop();
-            elapsed = TimeSpan.Zero;
-            CounterBtn.Text = "Start";
+        statusMessage.Text = "";
+
+        App.UserRepo.AddNewUser(newUser.Text);
+        statusMessage.Text = App.UserRepo.StatusMessage;
+    }
+
+    private void GetAllUser_Clicked(object sender, EventArgs e)
+    {
+        statusMessage.Text = "";
+
+        List<User> users = App.UserRepo.GetAllUsers();
+        peopleList.ItemsSource = users;
     }
 
 }
