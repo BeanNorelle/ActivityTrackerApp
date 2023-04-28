@@ -15,6 +15,10 @@
             Title="Stopwatch page"
             ContentTemplate="{DataTemplate local:StopWatchPage}"
             Route="StopWatchPage" />
+        <ShellContent
+            Title="Add User page"
+            ContentTemplate="{DataTemplate local:AddUserPage}"
+            Route="AddUserPage" />
     </TabBar>
 
 </Shell>

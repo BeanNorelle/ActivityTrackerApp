@@ -25,5 +25,6 @@
                  FontSize="35"
                 Clicked="OnCounterClicked"
                 HorizontalOptions="Center" />
+        
     </VerticalStackLayout>
 </ContentPage>

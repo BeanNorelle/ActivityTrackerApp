@@ -7,7 +7,7 @@ namespace MauiApp2
     public class UserRepository
     {
 
-        string _dbPath;
+        private string _dbPath;
         public string StatusMessage { get; set; }
         private SQLiteConnection conn;
         private void Init()
